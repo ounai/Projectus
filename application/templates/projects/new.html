@@ -1,0 +1,11 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <h2>New project</h2>
+  <form method="POST" action="{{ url_for('projects_create') }}">
+    Name: <input type="text" name="name" />
+    <br /><br />
+    <input type="submit" value="Create project" />
+  </form>
+{% endblock %}
+

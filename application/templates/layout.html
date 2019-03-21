@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Projectus</title>
+  </head>
+  <body>
+    <h1>Projectus</h1>
+    <hr>
+    <a href="{{ url_for('projects_list') }}">My projects</a>
+    <hr>
+    {% block body %}{% endblock %}
+  </body>
+</html>
+
