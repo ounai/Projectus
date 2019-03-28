@@ -3,8 +3,16 @@
 {% block body %}
   <h2>New project</h2>
   <form method="POST" action="{{ url_for('projects_create') }}">
-    Name: <input type="text" name="name" />
+    {{ form.name.label }}  {{ form.name }}
+
+    {% for error in form.name.errors %}
+      <br />
+      <span style="color: red;">
+        {{ error }}
+      </span>
+    {% endfor %}
     <br /><br />
+
     <input type="submit" value="Create project" />
   </form>
 {% endblock %}
