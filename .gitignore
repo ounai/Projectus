@@ -122,3 +122,7 @@ dmypy.json
 # Pyre type checker
 .pyre/
 projects.db
+
+# Temp files created by Dolphin
+.directory
+
