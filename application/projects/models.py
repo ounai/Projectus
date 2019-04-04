@@ -8,6 +8,8 @@ class Project(Base):
 
     account_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable = False)
 
+    tasks = db.relationship("Task", backref = "task", lazy = True)
+
     def __init__(self, name):
         self.name = name
         self.complete = False

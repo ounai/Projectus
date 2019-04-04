@@ -1,0 +1,20 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <h2>
+    Are you sure you want to permanently delete project "{{ project.name }}" and its {{ task_count }} 
+    {% if task_count == 1 %}
+      task?
+    {% else %}
+      tasks?
+    {% endif %}
+  </h2>
+
+  <br />
+
+  <div>
+    <a class="btn btn-danger" href="{{ url_for('projects_delete', project_id = project.id) }}">Delete project</a>
+    <a class="btn btn-primary" href="{{ url_for('projects_view', project_id = project.id) }}">Back to safety</a>
+  </div>
+{% endblock %}
+

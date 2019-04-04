@@ -3,26 +3,44 @@
 {% block body %}
   <h2>Project {{ project.name }}</h2>
 
-  Deadline {{ project.deadline }}<br />
-  Has {{ task_count }} tasks<br />
+  <a href="{{ url_for('projects_edit_form', project_id = project.id) }}">Edit</a>
+  <span> - </span>
+  <a style="color: crimson;" href="{{ url_for('projects_confirm_delete', project_id = project.id) }}">Delete</a>
 
-  <h3>Uncompleted tasks</h3>
-  <ul>
-    {% for task in tasks %}
-      {% if not task.complete %}
-        <li>{{ task.name }} (deadline: {{ task.deadline }})</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+  <hr>
 
-  <h3>Completed tasks</h3>
-  <ul>
-    {% for task in tasks %}
-      {% if task.complete %}
-        <li>{{ task.name }} (deadline: {{ task.deadline }})</li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+  <p>
+    Deadline {{ project.deadline }}<br />
+    Has {{ task_count }} tasks<br />
+  </p>
+
+  <div>
+    <h3>Uncompleted tasks</h3>
+    <ul>
+      {% for task in tasks %}
+        {% if not task.complete %}
+          <li>
+            {{ task.name }} (deadline: {{ task.deadline }}) 
+            <a href="{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}">mark complete</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
+
+  <div>
+    <h3>Completed tasks</h3>
+    <ul>
+      {% for task in tasks %}
+        {% if task.complete %}
+          <li>
+            {{ task.name }} (deadline: {{ task.deadline }}) 
+            <a href="{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}">mark not complete</a>
+          </li>
+        {% endif %}
+      {% endfor %}
+    </ul>
+  </div>
 
   <div>
     <a href="{{ url_for('tasks_form', project_id = project.id) }}">Add task</a>
