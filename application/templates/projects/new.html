@@ -12,6 +12,14 @@
         {{ error }}
       </span>
     {% endfor %}
+
+    {% for error in form.deadline.errors %}
+      <br />
+      <span style="color: red;">
+        {{ error }}
+      </span>
+    {% endfor %}
+
     <br /><br />
 
     <input type="submit" value="Create project" />

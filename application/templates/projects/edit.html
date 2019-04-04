@@ -2,5 +2,24 @@
 
 {% block body %}
   <h2>Edit project {{ project.name }}</h2>
+  <form method="POST" action="{{ url_for('projects_edit', project_id = project.id) }}">
+    {{ form.name.label }} {{ form.name(value = project.name) }} <br />
+    {% for error in form.name.errors %}
+      <span style="color: red;">
+        {{ error }}
+      </span>
+      <br />
+    {% endfor %}
+
+    {{ form.deadline.label }} {{ form.deadline(value = project.deadline) }} <br />
+    {% for error in form.deadline.errors %}
+      <span style="color: red;">
+        {{ error }}
+      </span>
+      <br />
+    {% endfor %}
+
+    <input type="submit" value="Save" />
+  </form>
 {% endblock %}
 

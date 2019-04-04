@@ -51,7 +51,7 @@ def projects_edit_form(project_id):
     project = Project.query.get(project_id)
 
     if project.account_id == current_user.id:
-        return render_template("projects/edit.html", project = project)
+        return render_template("projects/edit.html", project = project, form = ProjectForm())
     else:
         return redirect(url_for("projects_list"))
 
@@ -86,15 +86,17 @@ def projects_edit(project_id):
     project = Project.query.get(project_id)
 
     if project.account_id == current_user.id:
-        if request.form.get("name") != "":
-            project.name = request.form.get("name")
-        
-        if request.form.get("deadline") != "":
-            project.deadline = request.form.get("deadline")
+        form = ProjectForm(request.form)
+
+        if not form.validate():
+            return render_template("projects/edit.html", project = project, form = form)
+
+        project.name = form.name.data
+        project.deadline = form.deadline.data
 
         db.session().commit()
 
-    return redirect(url_for("projects_list"))
+    return redirect(url_for("projects_view", project_id = project_id))
 
 @app.route("/projects/<project_id>/new_task/", methods=["GET"])
 @login_required
