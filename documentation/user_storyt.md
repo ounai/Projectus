@@ -6,9 +6,6 @@
 - Käyttäjä pystyy näkemään listan projekteistaan
 - Käyttäjä pystyy luomaan projektille tehtäviä
 - Käyttäjä pystyy näkemään projektin tehtävät
-
-# Puuttuva toiminnallisuus
-
 - Käyttäjä pystyy muokkaamaan projektia
 - Käyttäjä pystyy poistamaan projektin
 - Käyttäjä pystyy muokkaamaan tehtäviä
