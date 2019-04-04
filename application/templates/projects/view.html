@@ -2,4 +2,29 @@
 
 {% block body %}
   <h2>Project {{ project.name }}</h2>
+
+  Deadline {{ project.deadline }}<br />
+  Has {{ task_count }} tasks<br />
+
+  <h3>Uncompleted tasks</h3>
+  <ul>
+    {% for task in tasks %}
+      {% if not task.complete %}
+        <li>{{ task.name }} (deadline: {{ task.deadline }})</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <h3>Completed tasks</h3>
+  <ul>
+    {% for task in tasks %}
+      {% if task.complete %}
+        <li>{{ task.name }} (deadline: {{ task.deadline }})</li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+
+  <div>
+    <a href="{{ url_for('tasks_form', project_id = project.id) }}">Add task</a>
+  </div>
 {% endblock %}
