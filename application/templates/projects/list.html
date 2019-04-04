@@ -6,9 +6,7 @@
   <ul>
     {% for project in projects %}
       <li>
-        <a href="{{ project.id }}">
-          {{ project.name }}
-        </a>
+        <a href="{{ project.id }}">{{ project.name }}</a> (deadline {{ project.deadline }})
       </li>
     {% endfor %}
   </ul>

@@ -1,37 +1,32 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <span style="color: red;">
-    {{ error }}
-  </span>
+  <center>
+    <div class="col-md-6">
+      <span style="color: red;">
+        {{ error }}
+      </span>
 
-  <form method="POST" action="{{ url_for('auth_login') }}">
-    <table>
-      <tr>
-        <td>
+      <form method="POST" action="{{ url_for('auth_login') }}">
+
+        <div class="form-group">
           {{ form.username.label }}
-        </td>
-        <td>
-          {{ form.username }}
-        </td>
-      </tr>
-      <tr>
-        <td>
-          {{ form.password.label }}
-        </td>
-        <td>
-          {{ form.password }}
-        </td>
-      </tr>
-      <tr>
-        <td colspan="2">
-          <input type="submit" value="Login" />
-        </td>
-      </tr>
-    </table>
-  </form>
+          <br />
+          {{ form.username(class_ = "form-control") }}
+        </div>
 
-  <p>
-    No user? <a href="{{ url_for('auth_register_form') }}">Register here!</a>
-  </p>
+        <div class="form-group">
+          {{ form.password.label }}
+          <br />
+          {{ form.password(class_ = "form-control") }}
+        </div>
+
+        <input class="form-control btn btn-primary" type="submit" value="Login" />
+      </form>
+
+      <br />
+
+      <p>No user? <a href="{{ url_for('auth_register_form') }}">Register here!</a></p>
+    </div>
+  </center>
 {% endblock %}
