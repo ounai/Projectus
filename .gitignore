@@ -126,3 +126,6 @@ projects.db
 # Temp files created by Dolphin
 .directory
 
+# Temp files created by vim
+*.swp
+

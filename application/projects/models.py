@@ -20,7 +20,7 @@ class Project(Base):
     def find_projects_by_user_with_tasks_due_on(account_id, deadline):
         stmt = text("SELECT Project.id, Project.name FROM Project"
                     " LEFT JOIN Task on Task.project_id = Project.id"
-                    " WHERE (Task.deadline = :deadline AND Project.account_id = :account_id AND Task.complete = 0)"
+                    " WHERE (Task.deadline = :deadline AND Project.account_id = :account_id AND NOT Task.complete)"
                     " GROUP BY Project.id").params(deadline = deadline, account_id = account_id)
 
         res = db.engine.execute(stmt)
