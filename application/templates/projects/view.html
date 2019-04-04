@@ -22,6 +22,8 @@
           <li>
             {{ task.name }} (deadline: {{ task.deadline }}) 
             <a href="{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}">mark complete</a>
+            <span> - </span>
+            <a style="color: crimson;" href="{{ url_for('tasks_delete', project_id = project.id, task_id = task.id) }}">delete</a>
           </li>
         {% endif %}
       {% endfor %}
@@ -36,6 +38,8 @@
           <li>
             {{ task.name }} (deadline: {{ task.deadline }}) 
             <a href="{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}">mark not complete</a>
+            <span> - </span>
+            <a style="color: crimson;" href="{{ url_for('tasks_delete', project_id = project.id, task_id = task.id) }}">delete</a>
           </li>
         {% endif %}
       {% endfor %}

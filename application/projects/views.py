@@ -141,3 +141,16 @@ def tasks_toggle_complete(project_id, task_id):
 
     return redirect(url_for("projects_view", project_id = project_id))
 
+@app.route("/projects/<project_id>/tasks/<task_id>/delete")
+@login_required
+def tasks_delete(project_id, task_id):
+    project = Project.query.get(project_id)
+    task = Task.query.get(task_id)
+
+    if project.account_id == current_user.id and task.project_id == project.id:
+        Task.query.filter_by(id = task_id).delete()
+
+        db.session.commit()
+
+    return redirect(url_for("projects_view", project_id = project_id))
+
