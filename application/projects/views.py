@@ -73,8 +73,8 @@ def projects_delete(project_id):
     project = Project.query.get(project_id)
 
     if project.account_id == current_user.id:
-        Project.query.filter_by(id = project_id).delete()
         Task.query.filter_by(project_id = project.id).delete()
+        Project.query.filter_by(id = project_id).delete()
 
         db.session().commit()
 
