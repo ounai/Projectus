@@ -15,36 +15,26 @@
   </p>
 
   <div>
-    <h3>Uncompleted tasks</h3>
-    <ul>
-      {% for task in tasks %}
-        {% if not task.complete %}
-          <li>
-            {{ task.name }} (deadline: {{ task.deadline }}) 
-            <a href="{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}">mark complete</a>
-            <span> - </span>
-            <a style="color: crimson;" href="{{ url_for('tasks_delete', project_id = project.id, task_id = task.id) }}">delete</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
+    <h3>Tasks</h3>
+
+    {% for task in uncompleted_tasks %}
+      <input type="checkbox" onchange="location = '{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}';" />
+      {{ task.name }} (deadline: {{ task.deadline }})
+      <span> - </span>
+      <a style="color: crimson;" href="{{ url_for('tasks_delete', project_id = project.id, task_id = task.id) }}">delete</a>
+      <br />
+    {% endfor %}
+
+    {% for task in completed_tasks %}
+      <input type="checkbox" onchange="location = '{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}';" checked />
+      <em style="text-decoration: line-through;">{{ task.name }} (deadline: {{ task.deadline }})</em>
+      <span> - </span>
+      <a style="color: crimson;" href="{{ url_for('tasks_delete', project_id = project.id, task_id = task.id) }}">delete</a>
+      <br />
+    {% endfor %}
   </div>
 
-  <div>
-    <h3>Completed tasks</h3>
-    <ul>
-      {% for task in tasks %}
-        {% if task.complete %}
-          <li>
-            {{ task.name }} (deadline: {{ task.deadline }}) 
-            <a href="{{ url_for('tasks_toggle_complete', project_id = project.id, task_id = task.id) }}">mark not complete</a>
-            <span> - </span>
-            <a style="color: crimson;" href="{{ url_for('tasks_delete', project_id = project.id, task_id = task.id) }}">delete</a>
-          </li>
-        {% endif %}
-      {% endfor %}
-    </ul>
-  </div>
+  <br />
 
   <div>
     <a class="btn btn-primary" href="{{ url_for('tasks_form', project_id = project.id) }}">Add task</a>

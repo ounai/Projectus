@@ -39,9 +39,13 @@ def projects_view(project_id):
     
     if project.account_id == current_user.id:
         tasks = Task.query.filter_by(project_id = project.id)
+
+        completed_tasks = Task.query.filter_by(project_id = project.id, complete = True)
+        uncompleted_tasks = Task.query.filter_by(project_id = project.id, complete = False)
+
         task_count = tasks.count()
 
-        return render_template("projects/view.html", project = project, tasks = tasks, task_count = task_count)
+        return render_template("projects/view.html", project = project, tasks = tasks, completed_tasks = completed_tasks, uncompleted_tasks = uncompleted_tasks, task_count = task_count)
     else:
         return redirect(url_for("projects_list"))
 
