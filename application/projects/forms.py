@@ -16,3 +16,9 @@ class TaskForm(FlaskForm):
     class Meta:
         csrf = False
 
+class CategoryForm(FlaskForm):
+    name = StringField("Category name", [validators.Length(min = 3)])
+
+    class Meta:
+        csrf = False
+

@@ -6,6 +6,7 @@ app = Flask(__name__, static_folder = "public", static_url_path = "")
 
 # Import SQLAlchemy
 from flask_sqlalchemy import SQLAlchemy
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 
 # DB config
 if os.environ.get("HEROKU"):

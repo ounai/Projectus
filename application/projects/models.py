@@ -10,11 +10,14 @@ class Project(Base):
 
     account_id = db.Column(db.Integer, db.ForeignKey("account.id"), nullable = False)
 
-    tasks = db.relationship("Task", backref = "task", lazy = True)
+    tasks = db.relationship("Task", backref = "project_task", lazy = True)
+    categories = db.relationship("Category", backref = "category", lazy = True)
 
-    def __init__(self, name):
+    def __init__(self, name, deadline, account_id):
         self.name = name
         self.complete = False
+        self.deadline = deadline
+        self.account_id = account_id
 
     @staticmethod
     def find_projects_by_user_with_tasks_due_on(account_id, deadline):
@@ -40,8 +43,25 @@ class Task(Base):
     deadline = db.Column(db.Date, nullable = False)
 
     project_id = db.Column(db.Integer, db.ForeignKey("project.id"), nullable = False)
+    category_id = db.Column(db.Integer, db.ForeignKey("category.id"), nullable = False)
     
-    def __init__(self, name):
+    def __init__(self, name, deadline, project_id, category_id):
         self.name = name
         self.complete = False
+        self.deadline = deadline
+
+        self.project_id = project_id
+        self.category_id = category_id
+
+class Category(Base):
+    name = db.Column(db.String(144), nullable = False)
+
+    project_id = db.Column(db.Integer, db.ForeignKey("project.id"), nullable = False)
+
+    tasks = db.relationship("Task", backref = "category_task", lazy = True)
+
+    def __init__(self, name, project_id):
+        self.name = name
+
+        self.project_id = project_id
 

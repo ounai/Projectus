@@ -2,7 +2,7 @@
 
 {% block body %}
   <h2>New task for project {{ project.name }}</h2>
-  <form method="POST" action="{{ url_for('tasks_create', project_id = project.id) }}">
+  <form method="POST" action="{{ url_for('tasks_create', project_id = project.id, category_id = category.id) }}">
     {{ form.name.label }} {{ form.name }} <br />
     {{ form.deadline.label }} {{ form.deadline }} </br />
 
