@@ -7,6 +7,8 @@
       border-radius: 4px;
       border-color: rgb(33, 37, 41);
       margin: 10px;
+      padding-top: 10px;
+      padding-bottom: 10px;
     }
 
     .icon {
@@ -28,6 +30,13 @@
   <p>
     Deadline: {{ project.deadline }}<br />
     Has {{ tasks.count() }} tasks in {{ categories.count() }} categories<br />
+    Created by {{ creator_name }}<br />
+    Contributors:
+    {% for contributor in contributors %}
+      {{ contributor.name }},
+    {% endfor %}
+    <br />
+    <a href="{{ url_for('projects_join', invite_token = project.invite_token) }}">Invite link</a>
   </p>
 
   <div class="row justify-content-md">

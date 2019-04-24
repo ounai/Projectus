@@ -11,7 +11,7 @@ def index():
     if current_user.is_authenticated:
         today_date = date.today()
 
-        projects_due_today = Project.query.filter_by(account_id = current_user.id, complete = False, deadline = today_date)
+        projects_due_today = Project.query.filter_by(creator = current_user.id, complete = False, deadline = today_date)
         projects_with_tasks_due_today = Project.find_projects_by_user_with_tasks_due_on(current_user.id, today_date)
 
         return render_template("index.html", projects_due_today = projects_due_today, projects_with_tasks_due_today = projects_with_tasks_due_today)
