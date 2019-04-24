@@ -3,10 +3,12 @@
 {% block body %}
   <h2>New task for project {{ project.name }}</h2>
   <form method="POST" action="{{ url_for('tasks_create', project_id = project.id, category_id = category.id) }}">
-    {{ form.name.label }} {{ form.name(required = True) }} <br />
-    {{ form.deadline.label }} {{ form.deadline(required = True) }} </br />
+    {{ form.name.label }} {{ form.name(class_ = "form-control", required = True) }} <br />
+    {{ form.deadline.label }} {{ form.deadline(class_ = "form-control", required = True) }} </br />
 
-    <input type="submit" value="Add task" />
+    <input class="btn btn-primary" type="submit" value="Add task" />
   </form>
+
+  <a class="btn btn-danger" href="{{ url_for('projects_view', project_id = project.id) }}">Cancel</a>
 {% endblock %}
 

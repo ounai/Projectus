@@ -15,15 +15,23 @@
       width: 16px;
       height: 16px;
     }
+
+    .big-icon {
+      width: 20px;
+      height: 20px;
+    }
   </style>
 {% endblock %}
 
 {% block body %}
-  <h2>Project {{ project.name }}</h2>
+  <h2>{{ project.name }}</h2>
 
   <a href="{{ url_for('projects_edit_form', project_id = project.id) }}">Edit</a>
-  <span> - </span>
-  <a style="color: crimson;" href="{{ url_for('projects_confirm_delete', project_id = project.id) }}">Delete</a>
+  
+  {% if current_user.id == project.creator %}
+    <span> - </span>
+    <a style="color: crimson;" href="{{ url_for('projects_confirm_delete', project_id = project.id) }}">Delete</a>
+  {% endif %}
 
   <hr>
 
@@ -42,8 +50,17 @@
   <div class="row justify-content-md">
     {% for category in categories %}
       <div class="col-md-auto category">
-        <h3>{{ category.name }}</h3>
+        <h3>
+          {{ category.name }}
+          <a href="{{ url_for('categories_confirm_delete', project_id = project.id, category_id = category.id) }}">
+            <img class="big-icon" src="/svg/trash.svg" alt="delete category" />
+          </a>
+          <a href="{{ url_for('categories_edit_form', project_id = project.id, category_id = category.id) }}">
+            <img class="big-icon" src="/svg/pencil.svg" alt="edit category" />
+          </a>
+        </h3>
         <hr />
+
         {% for task in tasks %}
           {% if task.category_id == category.id %}
             {% if not task.complete %}

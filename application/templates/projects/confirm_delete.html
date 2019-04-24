@@ -2,19 +2,20 @@
 
 {% block body %}
   <h2>
-    Are you sure you want to permanently delete project "{{ project.name }}" and its {{ task_count }} 
+    Are you sure you want to permanently delete project "{{ project.name }}" and its {{ task_count }}
     {% if task_count == 1 %}
-      task?
+      task
     {% else %}
-      tasks?
+      tasks
     {% endif %}
+    in {{ category_count }} categories?
   </h2>
 
   <br />
 
   <div>
     <a class="btn btn-danger" href="{{ url_for('projects_delete', project_id = project.id) }}">Delete project</a>
-    <a class="btn btn-primary" href="{{ url_for('projects_view', project_id = project.id) }}">Back to safety</a>
+    <a class="btn btn-primary" href="{{ url_for('projects_view', project_id = project.id) }}">Cancel</a>
   </div>
 {% endblock %}
 

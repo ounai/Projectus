@@ -3,7 +3,7 @@
 {% block body %}
   <h2>Task {{ task.name }}</h2>
   <form method="POST" action="{{ url_for('tasks_edit', project_id = project.id, task_id = task.id) }}">
-    {{ form.name.label }} {{ form.name(value = task.name) }} <br />
+    {{ form.name.label }} {{ form.name(class_ = "form-control", value = task.name) }} <br />
     {% for error in form.name.errors %}
       <span style="color: red;">
         {{ error }}
@@ -11,7 +11,7 @@
       <br />
     {% endfor %}
 
-    {{ form.deadline.label }} {{ form.deadline(value = task.deadline) }} <br />
+    {{ form.deadline.label }} {{ form.deadline(class_ = "form-control", value = task.deadline) }} <br />
     {% for error in form.deadline.errors %}
       <span style="color: red;">
         {{ error }}
@@ -19,7 +19,9 @@
       <br />
     {% endfor %}
 
-    <input type="submit" value="Save" />
+    <input class="btn btn-primary" type="submit" value="Save" />
   </form>
+
+  <a class="btn btn-danger" href="{{ url_for('projects_view', project_id = project.id) }}">Cancel</a>
 {% endblock %}
 
