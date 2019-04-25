@@ -10,6 +10,7 @@ class User(Base):
 
     own_projects = db.relationship("Project", backref = "account", lazy = True)
     projects = db.relationship("Project", secondary = "user_project")
+    roles = db.relationship("Role", backref = "account", lazy = True)
 
     def __init__(self, name, username, password):
         self.name = name
@@ -33,6 +34,27 @@ class User(Base):
 
         db.session().add(user_project)
         db.session().commit()
+
+    def add_role(self, role_name):
+        role = Role(role_name, self.id)
+
+        db.session().add(role)
+        db.session().commit()
+
+    def has_role(self, role_name):
+        for role in self.roles:
+            if role.name == role_name:
+                return True
+
+        return False
+
+class Role(Base):
+    name = db.Column(db.String(144), nullable = False)
+    account_id = db.Column(db.Integer, db.ForeignKey("account.id"))
+
+    def __init__(self, name, account_id):
+        self.name = name
+        self.account_id = account_id
 
 class UserProject(db.Model):
     account_id = db.Column(db.Integer, db.ForeignKey("account.id"), primary_key = True)
