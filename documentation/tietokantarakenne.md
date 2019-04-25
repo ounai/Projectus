@@ -92,7 +92,7 @@ CREATE TABLE Task (
   category_id INTEGER NOT NULL,
   PRIMARY KEY (id),
   FOREIGN KEY (project_id) REFERENCES Project(id),
-  FOREIGN KEY (category_id) REFERENCES Category(id
+  FOREIGN KEY (category_id) REFERENCES Category(id)
 )
 ```
 
