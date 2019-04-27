@@ -24,7 +24,7 @@ class Project(Base):
         self.complete = False
         self.deadline = deadline
         self.creator = creator
-        self.invite_token = randint(1000000000, 9999999999)
+        self.invite_token = randint(10000000, 99999999)
 
     def has_access(self, account_id):
         user_project = UserProject.query.filter_by(account_id = account_id, project_id = self.id)
