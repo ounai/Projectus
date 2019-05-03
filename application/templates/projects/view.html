@@ -26,9 +26,8 @@
 {% block body %}
   <h2>{{ project.name }}</h2>
 
-  <a href="{{ url_for('projects_edit_form', project_id = project.id) }}">Edit</a>
-  
   {% if current_user.id == project.creator %}
+    <a href="{{ url_for('projects_edit_form', project_id = project.id) }}">Edit</a>
     <span> - </span>
     <a style="color: crimson;" href="{{ url_for('projects_confirm_delete', project_id = project.id) }}">Delete</a>
   {% endif %}

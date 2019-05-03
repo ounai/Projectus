@@ -2,10 +2,22 @@
 
 {% block body %}
   <h2>New category for project {{ project.name }}</h2>
-  <form method="POST" action="{{ url_for('categories_create', project_id = project.id) }}">
-    {{ form.name.label }} {{ form.name }}
 
-    <input type="submit" value="Add category" />
+  <form method="POST" action="{{ url_for('categories_create', project_id = project.id) }}">
+    {{ form.name.label }} {{ form.name(class_ = "form-control", required = True) }}
+    
+    {% for error in form.name.errors %}
+      <span style="color: red;">
+        {{ error }}
+      </span>
+      <br />
+    {% endfor %}
+
+    <br />
+
+    <input class="btn btn-primary" type="submit" value="Add category" />
   </form>
+
+  <a class="btn btn-danger" href="{{ url_for('projects_view', project_id = project_id) }}">Cancel</a>
 {% endblock %}
 

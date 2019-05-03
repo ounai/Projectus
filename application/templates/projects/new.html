@@ -3,24 +3,27 @@
 {% block body %}
   <h2>New project</h2>
   <form method="POST" action="{{ url_for('projects_create') }}">
-    {{ form.name.label }}  {{ form.name(class_ = "form-control", required = True) }} <br />
-    {{ form.deadline.label }} {{ form.deadline(class_ = "form-control", required = True) }}
+    {{ form.name.label }}  {{ form.name(class_ = "form-control", required = True) }}
 
     {% for error in form.name.errors %}
-      <br />
       <span style="color: red;">
         {{ error }}
       </span>
+      <br />
     {% endfor %}
+
+    <br />
+
+    {{ form.deadline.label }} {{ form.deadline(class_ = "form-control", required = True) }}
 
     {% for error in form.deadline.errors %}
-      <br />
       <span style="color: red;">
         {{ error }}
       </span>
+      <br />
     {% endfor %}
 
-    <br /><br />
+    <br />
 
     <input class="btn btn-primary" type="submit" value="Create project" />
   </form>

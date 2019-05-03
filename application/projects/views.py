@@ -56,7 +56,7 @@ def projects_view(project_id):
 def projects_edit_form(project_id):
     project = Project.query.get(project_id)
 
-    if project.has_access(current_user.id):
+    if project.creator == current_user.id:
         return render_template("projects/edit.html", project = project, form = ProjectForm())
     else:
         return redirect(url_for("projects_list"))
@@ -93,7 +93,7 @@ def projects_delete(project_id):
 def projects_edit(project_id):
     project = Project.query.get(project_id)
 
-    if project.has_access(current_user.id):
+    if project.creator == current_user.id:
         form = ProjectForm(request.form)
 
         if not form.validate():

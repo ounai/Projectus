@@ -28,7 +28,7 @@ def tasks_create(project_id, category_id):
         form = TaskForm(request.form)
 
         if not form.validate():
-            return render_template("projects/new_task.html", form = form)
+            return render_template("projects/new_task.html", form = form, project = project, category = category)
 
         new_task = Task(form.name.data, form.deadline.data, project_id, category_id)
 

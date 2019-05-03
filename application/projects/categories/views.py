@@ -26,7 +26,7 @@ def categories_create(project_id):
         form = CategoryForm(request.form)
 
         if not form.validate():
-            return render_template("projects/new_category.html", form = form)
+            return render_template("projects/new_category.html", form = form, project = project)
 
         new_category = Category(form.name.data, project_id)
 
