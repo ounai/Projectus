@@ -4,4 +4,5 @@ Projektinhallintatyökalu, jolla voidaan luoda erilaisia projekteja (esim. yliop
 
 Heroku: https://projectus-tsoha.herokuapp.com
 Testitunnus: test / test
+Admintunnus: admin / admin
 

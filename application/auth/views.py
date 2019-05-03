@@ -69,6 +69,9 @@ def auth_profile_edit():
     if form.username.data != current_user.username and User.query.filter_by(username = form.username.data).first():
         return render_template("auth/profile.html", form = form, error = "Username already in use", user = current_user)
 
+    if current_user.username == 'test' or current_user.username == 'admin':
+        return render_template("auth/profile.html", form = form, error = "This account cannot be edited", user = current_user)
+
     current_user.name = form.name.data
     current_user.username = form.username.data
     current_user.password = form.password.data
