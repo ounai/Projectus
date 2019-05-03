@@ -129,3 +129,5 @@ projects.db
 # Temp files created by vim
 *.swp
 
+# Temp files created by vscode
+.vscode

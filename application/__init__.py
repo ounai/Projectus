@@ -62,10 +62,14 @@ def login_required(role = "ANY"):
 # Import views
 from application import views
 from application.projects import views
+from application.projects.tasks import views
+from application.projects.categories import views
 from application.auth import views
 
 # Import models
 from application.projects import models
+from application.projects.tasks import models
+from application.projects.categories import models
 from application.auth import models
 
 from application.auth.models import User

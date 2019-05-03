@@ -4,7 +4,8 @@ from flask_login import current_user
 from datetime import date
 
 from application import app
-from application.projects.models import Project, Task
+from application.projects.models import Project
+from application.projects.tasks.models import Task
 
 @app.route("/")
 def index():
