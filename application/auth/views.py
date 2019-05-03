@@ -83,5 +83,20 @@ def auth_profile_edit():
 @app.route("/auth/admin")
 @login_required(role = "ADMIN")
 def auth_admin():
-    return render_template("auth/admin.html")
+    users = User.query.all()
+    return render_template("auth/admin.html", users = users)
+
+@app.route("/auth/admin/add/<username>")
+@login_required(role = "ADMIN")
+def auth_add_admin(username):
+    User.query.filter_by(username = username).first().add_role("ADMIN")
+    return redirect(url_for("auth_admin"))
+
+@app.route("/auth/admin/remove/<username>")
+@login_required(role = "ADMIN")
+def auth_remove_admin(username):
+    if username != "admin":
+        User.query.filter_by(username = username).first().remove_role("ADMIN")
+
+    return redirect(url_for("auth_admin"))
 

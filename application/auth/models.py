@@ -36,10 +36,19 @@ class User(Base):
         db.session().commit()
 
     def add_role(self, role_name):
+        for role in self.roles:
+            if role.name == role_name:
+                return
+
         role = Role(role_name, self.id)
 
         db.session().add(role)
         db.session().commit()
+
+    def remove_role(self, role_name):
+        if self.has_role(role_name):
+            Role.query.filter_by(account_id = self.id, name = role_name).delete()
+            db.session().commit()
 
     def has_role(self, role_name):
         for role in self.roles:
